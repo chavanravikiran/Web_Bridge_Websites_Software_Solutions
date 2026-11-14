@@ -135,6 +135,7 @@ a.channel:hover { transform: translateX(6px); }
     font-weight: 500;
     color: #cbd5e1;
     span { color: var(--neon); }
+    span.optional { color: var(--text-3); font-weight: 400; }
   }
 }
 

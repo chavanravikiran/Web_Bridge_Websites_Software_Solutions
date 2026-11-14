@@ -1,0 +1,49 @@
+<section id="freelance" class="section freelance" aria-labelledby="freelance-title">
+  <div class="freelance__bg" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="availability" appReveal>
+      <span class="availability__dot" aria-hidden="true"></span>
+      {{ content.availability }}
+    </div>
+
+    <app-section-header
+      eyebrow="Freelance"
+      [title]="content.title"
+      [highlight]="content.highlight"
+      [subtitle]="content.subtitle"
+      headingId="freelance-title"
+    />
+
+    <ul class="models">
+      @for (m of models; track m.title; let i = $index) {
+        <li class="model glass glow-border" [class.model--featured]="m.featured" appReveal [revealDelay]="i * 100">
+          @if (m.featured) { <span class="model__flag">Most popular</span> }
+          <span class="model__icon"><app-icon [name]="m.icon" /></span>
+          <h3>{{ m.title }}</h3>
+          <p>{{ m.description }}</p>
+          <ul class="model__points">
+            @for (pt of m.points; track pt) {
+              <li><app-icon name="check" /> {{ pt }}</li>
+            }
+          </ul>
+          <p class="model__best"><span>Best for</span>{{ m.bestFor }}</p>
+        </li>
+      }
+    </ul>
+
+    <div class="hire glass" appReveal>
+      <ul class="hire__perks">
+        @for (perk of content.perks; track perk.text) {
+          <li><app-icon [name]="perk.icon" /> {{ perk.text }}</li>
+        }
+      </ul>
+      <div class="hire__ctas">
+        <a href="#contact" class="btn btn--primary">Hire Us for Your Project <app-icon name="arrowRight" class="arrow" /></a>
+        <a [href]="whatsapp" target="_blank" rel="noopener" class="btn btn--whatsapp">
+          <app-icon name="message" /> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -128,7 +128,19 @@
               <small id="e-service" class="err">@if (invalid('service')) { {{ error('service') }} }</small>
             </div>
 
-            <div class="field field--full" [class.has-error]="invalid('budget')">
+            <div class="field">
+              <label for="c-engagement">Project type <span class="optional">(optional)</span></label>
+              <div class="select">
+                <select id="c-engagement" formControlName="engagement">
+                  <option value="">Select how you'd like to work</option>
+                  @for (e of engagementOptions; track e) { <option [value]="e">{{ e }}</option> }
+                </select>
+                <app-icon name="chevronDown" />
+              </div>
+              <small class="err"></small>
+            </div>
+
+            <div class="field" [class.has-error]="invalid('budget')">
               <label for="c-budget">Project budget <span aria-hidden="true">*</span></label>
               <div class="select">
                 <select id="c-budget" formControlName="budget" [attr.aria-invalid]="invalid('budget')" aria-describedby="e-budget">

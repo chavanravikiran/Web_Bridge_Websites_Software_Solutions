@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { BUDGET_OPTIONS, CONTACT, SERVICE_OPTIONS } from '../../data/site.data';
+import { BUDGET_OPTIONS, CONTACT, ENGAGEMENT_OPTIONS, SERVICE_OPTIONS } from '../../data/site.data';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { RevealDirective } from '../../core/reveal.directive';
 
 type Channel = 'whatsapp' | 'email';
 type Status = 'idle' | 'error' | 'choose' | 'success';
-type Field = 'name' | 'email' | 'phone' | 'service' | 'budget' | 'description';
+type Field = 'name' | 'email' | 'phone' | 'service' | 'engagement' | 'budget' | 'description';
 
 interface EmailProvider {
   id: 'gmail' | 'yahoo' | 'outlook' | 'app';
@@ -48,6 +48,7 @@ export class ContactComponent {
   protected readonly contact = CONTACT;
   protected readonly serviceOptions = SERVICE_OPTIONS;
   protected readonly budgetOptions = BUDGET_OPTIONS;
+  protected readonly engagementOptions = ENGAGEMENT_OPTIONS;
   protected readonly status = signal<Status>('idle');
   protected readonly sentVia = signal<Channel>('whatsapp');
   protected readonly copied = signal(false);
@@ -59,6 +60,7 @@ export class ContactComponent {
     email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN), Validators.maxLength(120)]],
     phone: ['', [Validators.required, phoneValidator]],
     service: ['', Validators.required],
+    engagement: [''],
     budget: ['', Validators.required],
     description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(this.maxDescription)]],
   });
@@ -163,6 +165,7 @@ export class ContactComponent {
       `Email: ${v.email}`,
       `Phone: ${v.phone}`,
       `Service: ${v.service}`,
+      `Project type: ${v.engagement || 'Not specified'}`,
       `Budget: ${v.budget}`,
       '',
       'Project description:',
