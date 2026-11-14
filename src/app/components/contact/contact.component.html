@@ -1,0 +1,170 @@
+<section id="contact" class="section contact" aria-labelledby="contact-title">
+  <div class="contact__bg" aria-hidden="true"><span class="orb orb--a"></span><span class="orb orb--b"></span></div>
+
+  <div class="container contact__grid">
+    <!-- left: pitch + direct channels -->
+    <div class="contact__info">
+      <span class="eyebrow" appReveal>Contact</span>
+      <h2 id="contact-title" appReveal [revealDelay]="80">
+        Have an Idea? <span class="gradient-text">Let's Build Something Amazing.</span>
+      </h2>
+      <p class="contact__lead" appReveal [revealDelay]="140">
+        Tell us about your project and we'll reply with next steps, a rough timeline and an estimate. No obligations.
+      </p>
+
+      <ul class="channels">
+        <li appReveal [revealDelay]="200">
+          <a class="channel glass glow-border" [href]="mailDirect">
+            <span class="channel__icon"><app-icon name="mail" /></span>
+            <span><small>Email us</small><strong>{{ contact.email }}</strong></span>
+          </a>
+        </li>
+        <li appReveal [revealDelay]="260">
+          <a class="channel glass glow-border" [href]="whatsappDirect" target="_blank" rel="noopener">
+            <span class="channel__icon channel__icon--wa"><app-icon name="message" /></span>
+            <span><small>WhatsApp</small><strong>{{ contact.phoneDisplay }}</strong></span>
+          </a>
+        </li>
+        <li appReveal [revealDelay]="320">
+          <div class="channel glass">
+            <span class="channel__icon"><app-icon name="mapPin" /></span>
+            <span><small>Location</small><strong>{{ contact.location }}</strong></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- right: form -->
+    <div class="form-card glass" appReveal [revealDelay]="150">
+      @if (status() === 'success') {
+        <div class="success" role="status" aria-live="polite">
+          <span class="success__icon"><app-icon name="checkCircle" /></span>
+          <h3>Your inquiry is ready to send!</h3>
+          <p>
+            @if (sentVia() === 'whatsapp') {
+              We've opened WhatsApp with your project details pre-filled. Just press <strong>send</strong> in WhatsApp to reach us.
+            } @else {
+              We've opened your email with your project details pre-filled. Just press <strong>send</strong> to reach us.
+            }
+          </p>
+          <p class="success__hint">
+            Nothing opened? Email us at <a [href]="mailDirect">{{ contact.email }}</a> or
+            <a [href]="whatsappDirect" target="_blank" rel="noopener">message us on WhatsApp</a>.
+          </p>
+          <button type="button" class="btn btn--ghost btn--sm" (click)="reset()">Send another inquiry</button>
+        </div>
+      } @else if (status() === 'choose') {
+        <div class="chooser" role="group" aria-labelledby="chooser-title">
+          <h3 id="chooser-title" class="form-title">How would you like to send your email?</h3>
+          <p class="chooser__lead">Pick the email service you use. Your inquiry will be pre-filled to <strong>{{ contact.email }}</strong>. Just press send.</p>
+
+          <ul class="providers">
+            @for (p of providers; track p.id) {
+              <li>
+                <button type="button" class="provider glass glow-border" [style.--c]="p.color" (click)="sendEmail(p.id)">
+                  <span class="provider__mark" aria-hidden="true">{{ p.mark }}</span>
+                  <span class="provider__text">
+                    <strong>{{ p.label }}</strong>
+                    <small>{{ p.hint }}</small>
+                  </span>
+                  <app-icon name="external" class="provider__go" />
+                </button>
+              </li>
+            }
+          </ul>
+
+          <div class="chooser__alt">
+            <button type="button" class="btn btn--ghost btn--sm" (click)="copyDetails()">
+              <app-icon [name]="copied() ? 'check' : 'copy'" /> {{ copied() ? 'Copied! Paste into any email' : 'Copy details instead' }}
+            </button>
+            <button type="button" class="link-btn" (click)="backToForm()">
+              <app-icon name="chevronLeft" /> Back to form
+            </button>
+          </div>
+          <p class="visually-hidden" aria-live="polite">{{ copied() ? 'Inquiry copied to clipboard' : '' }}</p>
+        </div>
+      } @else {
+        <form [formGroup]="form" novalidate (ngSubmit)="submit('whatsapp')">
+          <h3 class="form-title">Project Inquiry</h3>
+
+          @if (status() === 'error' && form.invalid) {
+            <div class="alert" role="alert">
+              <app-icon name="alert" />
+              Please fix the highlighted fields before sending your inquiry.
+            </div>
+          }
+
+          <div class="fields">
+            <div class="field" [class.has-error]="invalid('name')">
+              <label for="c-name">Full name <span aria-hidden="true">*</span></label>
+              <input id="c-name" type="text" formControlName="name" autocomplete="name" placeholder="Jane Doe"
+                [attr.aria-invalid]="invalid('name')" aria-describedby="e-name" />
+              <small id="e-name" class="err">@if (invalid('name')) { {{ error('name') }} }</small>
+            </div>
+
+            <div class="field" [class.has-error]="invalid('email')">
+              <label for="c-email">Email <span aria-hidden="true">*</span></label>
+              <input id="c-email" type="email" formControlName="email" autocomplete="email" placeholder="jane@company.com"
+                [attr.aria-invalid]="invalid('email')" aria-describedby="e-email" />
+              <small id="e-email" class="err">@if (invalid('email')) { {{ error('email') }} }</small>
+            </div>
+
+            <div class="field" [class.has-error]="invalid('phone')">
+              <label for="c-phone">Phone number <span aria-hidden="true">*</span></label>
+              <input id="c-phone" type="tel" formControlName="phone" autocomplete="tel" inputmode="tel" placeholder="+1 555 123 4567"
+                [attr.aria-invalid]="invalid('phone')" aria-describedby="e-phone" />
+              <small id="e-phone" class="err">@if (invalid('phone')) { {{ error('phone') }} }</small>
+            </div>
+
+            <div class="field" [class.has-error]="invalid('service')">
+              <label for="c-service">Service required <span aria-hidden="true">*</span></label>
+              <div class="select">
+                <select id="c-service" formControlName="service" [attr.aria-invalid]="invalid('service')" aria-describedby="e-service">
+                  <option value="" disabled>Select a service</option>
+                  @for (s of serviceOptions; track s) { <option [value]="s">{{ s }}</option> }
+                </select>
+                <app-icon name="chevronDown" />
+              </div>
+              <small id="e-service" class="err">@if (invalid('service')) { {{ error('service') }} }</small>
+            </div>
+
+            <div class="field field--full" [class.has-error]="invalid('budget')">
+              <label for="c-budget">Project budget <span aria-hidden="true">*</span></label>
+              <div class="select">
+                <select id="c-budget" formControlName="budget" [attr.aria-invalid]="invalid('budget')" aria-describedby="e-budget">
+                  <option value="" disabled>Select a budget range</option>
+                  @for (b of budgetOptions; track b) { <option [value]="b">{{ b }}</option> }
+                </select>
+                <app-icon name="chevronDown" />
+              </div>
+              <small id="e-budget" class="err">@if (invalid('budget')) { {{ error('budget') }} }</small>
+            </div>
+
+            <div class="field field--full" [class.has-error]="invalid('description')">
+              <label for="c-desc">Project description <span aria-hidden="true">*</span></label>
+              <textarea id="c-desc" rows="5" formControlName="description" [attr.maxlength]="maxDescription"
+                placeholder="What are you building? Key features, goals, timeline…"
+                [attr.aria-invalid]="invalid('description')" aria-describedby="e-desc c-count"></textarea>
+              <div class="field__meta">
+                <small id="e-desc" class="err">@if (invalid('description')) { {{ error('description') }} }</small>
+                <small id="c-count" class="count">{{ form.controls.description.value.length }}/{{ maxDescription }}</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn--whatsapp">
+              <app-icon name="message" /> Send via WhatsApp
+            </button>
+            <button type="button" class="btn btn--primary" (click)="submit('email')">
+              <app-icon name="mail" /> Send via Email
+            </button>
+          </div>
+          <p class="privacy">
+            <app-icon name="shield" /> No data is stored on this website. Your message is sent directly through WhatsApp or your email app.
+          </p>
+        </form>
+      }
+    </div>
+  </div>
+</section>

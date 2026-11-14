@@ -1,0 +1,43 @@
+<header class="nav" [class.nav--scrolled]="scrolled() || open()">
+  <nav class="container nav__inner" aria-label="Primary">
+    <a href="#home" class="nav__brand" (click)="toggle(false)" [attr.aria-label]="brand.brand + ' — back to top'">
+      <app-logo />
+    </a>
+
+    <ul class="nav__links" id="primary-menu" [class.is-open]="open()">
+      @for (link of links; track link.target) {
+        <li>
+          <a
+            [href]="'#' + link.target"
+            class="nav__link"
+            [class.is-active]="sections.active() === link.target"
+            [attr.aria-current]="sections.active() === link.target ? 'true' : null"
+            (click)="toggle(false)"
+            >{{ link.label }}</a
+          >
+        </li>
+      }
+      <li class="nav__mobile-cta">
+        <a href="#contact" class="btn btn--primary" (click)="toggle(false)">
+          Let's Talk <app-icon name="arrowRight" class="arrow" />
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav__actions">
+      <a href="#contact" class="btn btn--primary btn--sm nav__cta">
+        Let's Talk <app-icon name="arrowRight" />
+      </a>
+      <button
+        type="button"
+        class="nav__toggle"
+        [attr.aria-expanded]="open()"
+        aria-controls="primary-menu"
+        [attr.aria-label]="open() ? 'Close menu' : 'Open menu'"
+        (click)="toggle()"
+      >
+        <app-icon [name]="open() ? 'close' : 'menu'" />
+      </button>
+    </div>
+  </nav>
+</header>

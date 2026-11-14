@@ -1,0 +1,110 @@
+<div class="pv">
+  <div class="win">
+    <div class="win__bar"><i></i><i></i><i></i><span></span></div>
+    <div class="win__body">
+      @switch (variant()) {
+        @case ('dashboard') {
+          <div class="dash">
+            <div class="side">@for (r of six; track r) { <b [class.on]="r === 1"></b> }</div>
+            <div class="main">
+              <div class="stats">
+                <div class="stat"><em></em><strong></strong></div>
+                <div class="stat"><em></em><strong></strong></div>
+                <div class="stat"><em></em><strong></strong></div>
+              </div>
+              <div class="bars">@for (b of bars; track $index) { <span [style.height.%]="b"></span> }</div>
+            </div>
+          </div>
+        }
+        @case ('laundry') {
+          <div class="list">
+            @for (r of rows; track r) {
+              <div class="row">
+                <span class="avatar"></span>
+                <span class="lines"><b></b><b class="short"></b></span>
+                <span class="pill" [class]="'pill pill--' + r"></span>
+              </div>
+            }
+          </div>
+        }
+        @case ('menu') {
+          <div class="menu">
+            <div class="chips"><b class="on"></b><b></b><b></b><b></b></div>
+            <div class="dishes">
+              @for (r of rows; track r) {
+                <div class="dish"><span class="img"></span><b></b><b class="short"></b><em></em></div>
+              }
+            </div>
+          </div>
+        }
+        @case ('monitor') {
+          <div class="mon">
+            <div class="gauges">
+              @for (r of [72, 48, 88]; track $index) {
+                <div class="gauge" [style.--p]="r"><span>{{ r }}%</span></div>
+              }
+            </div>
+            <svg viewBox="0 0 300 90" preserveAspectRatio="none" class="chart">
+              <path d="M0 70 L30 55 L60 62 L90 35 L120 45 L150 22 L180 38 L210 18 L240 30 L270 12 L300 20 L300 90 L0 90Z" class="area" />
+              <path d="M0 70 L30 55 L60 62 L90 35 L120 45 L150 22 L180 38 L210 18 L240 30 L270 12 L300 20" class="stroke" />
+            </svg>
+          </div>
+        }
+        @case ('shop') {
+          <div class="shop">
+            @for (r of six; track r) {
+              <div class="prod"><span class="img"></span><b></b><em></em></div>
+            }
+          </div>
+        }
+        @case ('website') {
+          <div class="site">
+            <div class="site__nav"><span class="logo"></span><b></b><b></b><b></b><em></em></div>
+            <div class="site__hero">
+              <div class="site__copy"><strong></strong><strong class="short"></strong><b></b><b class="short"></b><em></em></div>
+              <span class="img site__img"></span>
+            </div>
+            <div class="site__cards">
+              @for (r of [0, 1, 2]; track r) { <div class="site__card"><i></i><b></b><b class="short"></b></div> }
+            </div>
+          </div>
+        }
+        @case ('booking') {
+          <div class="book">
+            <div class="book__info"><span class="img"></span><b></b><b class="short"></b><b></b><em></em></div>
+            <div class="book__cal">
+              <div class="book__head"><b></b></div>
+              <div class="book__grid">
+                @for (d of days; track $index) { <span [class.on]="d === 1" [class.off]="d === 2"></span> }
+              </div>
+              <div class="book__slots"><i class="on"></i><i></i><i></i></div>
+            </div>
+          </div>
+        }
+        @case ('listing') {
+          <div class="lst">
+            <div class="lst__filters"><b class="on"></b><b></b><b></b><em></em></div>
+            @for (r of [0, 1]; track r) {
+              <div class="lst__row">
+                <span class="img"></span>
+                <span class="lines"><b></b><b class="short"></b><span class="lst__meta"><i></i><i></i><i></i></span></span>
+                <em class="price"></em>
+              </div>
+            }
+          </div>
+        }
+        @case ('hr') {
+          <div class="hr">
+            <div class="hr__head"><b></b><b></b><b></b></div>
+            @for (r of rows; track r) {
+              <div class="hr__row">
+                <span class="avatar"></span><b></b><b class="short"></b>
+                <span class="pill" [class]="'pill pill--' + ((r + 1) % 4)"></span>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

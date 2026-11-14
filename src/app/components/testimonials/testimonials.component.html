@@ -1,0 +1,75 @@
+<section id="testimonials" class="section" aria-labelledby="testimonials-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Testimonials"
+      title="What Working With Us"
+      highlight="Feels Like"
+      subtitle="Sample testimonials shown for demonstration purposes. They are placeholders, not genuine client reviews."
+      headingId="testimonials-title"
+    />
+
+    <div
+      class="carousel"
+      appReveal
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Sample testimonials"
+      (mouseenter)="pause(true)"
+      (mouseleave)="pause(false)"
+      (focusin)="pause(true)"
+      (focusout)="pause(false)"
+      (touchstart)="onTouchStart($event)"
+      (touchend)="onTouchEnd($event)"
+    >
+      <div class="carousel__viewport">
+        <ul class="carousel__track" [style.transform]="'translateX(-' + index() * 100 + '%)'">
+          @for (t of items; track t.name; let i = $index) {
+            <li
+              class="slide"
+              role="group"
+              aria-roledescription="slide"
+              [attr.aria-label]="(i + 1) + ' of ' + items.length"
+              [attr.aria-hidden]="i !== index()"
+              [attr.inert]="i !== index() ? '' : null"
+            >
+              <figure class="quote glass">
+                <span class="demo-badge quote__badge"><app-icon name="info" /> Sample · Demo content</span>
+                <app-icon name="quote" class="quote__mark" />
+                <blockquote>“{{ t.quote }}”</blockquote>
+                <figcaption>
+                  <span class="avatar" aria-hidden="true">{{ t.initials }}</span>
+                  <span>
+                    <strong>{{ t.name }}</strong>
+                    <small>{{ t.role }}</small>
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="carousel__controls">
+        <button type="button" class="arrow" aria-label="Previous testimonial" (click)="prev()">
+          <app-icon name="chevronLeft" />
+        </button>
+        <div class="dots">
+          @for (t of items; track t.name; let i = $index) {
+            <button
+              type="button"
+              class="dot"
+              [class.is-active]="i === index()"
+              [attr.aria-label]="'Show testimonial ' + (i + 1)"
+              [attr.aria-current]="i === index() ? 'true' : null"
+              (click)="go(i)"
+            ></button>
+          }
+        </div>
+        <button type="button" class="arrow" aria-label="Next testimonial" (click)="next()">
+          <app-icon name="chevronRight" />
+        </button>
+      </div>
+      <p class="visually-hidden" aria-live="polite">Showing testimonial {{ index() + 1 }} of {{ items.length }}</p>
+    </div>
+  </div>
+</section>

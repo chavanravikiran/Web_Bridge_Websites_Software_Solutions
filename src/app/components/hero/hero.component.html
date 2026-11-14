@@ -1,0 +1,64 @@
+<section id="home" class="hero" aria-labelledby="hero-title">
+  <!-- decorative background -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__grid"></div>
+    <span class="orb orb--blue"></span>
+    <span class="orb orb--purple"></span>
+    <span class="orb orb--cyan"></span>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hero__trust anim" style="--d: 0ms">
+        <span class="pulse" aria-hidden="true"></span>
+        {{ hero.trust }}
+      </p>
+
+      <h1 id="hero-title" class="hero__title anim" style="--d: 120ms">
+        {{ hero.titleLead }}
+        <span class="gradient-text hero__highlight">{{ hero.titleHighlight }}</span>
+      </h1>
+
+      <p class="hero__subtitle anim" style="--d: 260ms">{{ hero.subtitle }}</p>
+
+      <div class="hero__ctas anim" style="--d: 400ms">
+        <a href="#contact" class="btn btn--primary">
+          Start Your Project <app-icon name="arrowRight" class="arrow" />
+        </a>
+        <a href="#services" class="btn btn--ghost">Explore Our Services</a>
+      </div>
+
+      <ul class="hero__points anim" style="--d: 540ms">
+        @for (point of hero.points; track point) {
+          <li><app-icon name="checkCircle" /> {{ point }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="hero__visual anim" style="--d: 300ms" aria-hidden="true">
+      <div class="rings">
+        <span class="ring ring--1"></span>
+        <span class="ring ring--2"></span>
+        <span class="ring ring--3"></span>
+      </div>
+
+      <div class="terminal glass">
+        <div class="terminal__bar">
+          <span class="dot dot--r"></span><span class="dot dot--y"></span><span class="dot dot--g"></span>
+          <span class="terminal__title">~/webbridge — build</span>
+        </div>
+        <pre class="terminal__body"><code>@for (line of code; track $index) {<span class="line" [style.--i]="$index"><span class="ln">{{ $index + 1 }}</span>@for (tok of line; track $index) {<span [class]="'t-' + tok.cls">{{ tok.text }}</span>}</span>}<span class="cursor" [style.--i]="code.length"></span></code></pre>
+      </div>
+
+      @for (chip of chips; track chip.label; let i = $index) {
+        <div class="chip chip--{{ chip.pos }}" [style.--c]="chip.color" [style.--fd]="i * 0.7 + 's'">
+          <span class="chip__mark">{{ chip.mark }}</span>{{ chip.label }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <a href="#about" class="hero__scroll" aria-label="Scroll to About section">
+    <span></span>
+  </a>
+</section>

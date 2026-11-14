@@ -1,0 +1,35 @@
+<section id="services" class="section section--alt" aria-labelledby="services-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="What We Do"
+      title="Services Built for"
+      highlight="Modern Businesses"
+      subtitle="End-to-end software development — from idea and design to deployment and long-term support."
+      headingId="services-title"
+    />
+
+    <ul class="services">
+      @for (s of services; track s.title; let i = $index) {
+        <li
+          class="card glass glow-border"
+          appReveal
+          [revealDelay]="(i % 4) * 90"
+          (pointermove)="track($event)"
+        >
+          <span class="card__num" aria-hidden="true">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <span class="card__icon"><app-icon [name]="s.icon" /></span>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.description }}</p>
+          <ul class="card__tags" aria-label="Technologies">
+            @for (t of s.tags; track t) { <li class="tag">{{ t }}</li> }
+          </ul>
+        </li>
+      }
+    </ul>
+
+    <div class="services__cta" appReveal>
+      <p>Need something not listed here?</p>
+      <a href="#contact" class="btn btn--ghost btn--sm">Tell us about it <app-icon name="arrowRight" class="arrow" /></a>
+    </div>
+  </div>
+</section>

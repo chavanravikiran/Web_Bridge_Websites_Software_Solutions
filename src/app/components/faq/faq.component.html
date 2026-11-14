@@ -1,0 +1,46 @@
+<section id="faq" class="section section--alt" aria-labelledby="faq-title">
+  <div class="container faq">
+    <div class="faq__intro">
+      <app-section-header
+        eyebrow="FAQ"
+        title="Frequently Asked"
+        highlight="Questions"
+        subtitle="Everything you need to know before starting a project with us. Can't find your answer?"
+        headingId="faq-title"
+        align="left"
+      />
+      <a href="#contact" class="btn btn--ghost btn--sm" appReveal>Ask us directly <app-icon name="arrowRight" class="arrow" /></a>
+    </div>
+
+    <ul class="faq__list">
+      @for (f of faqs; track f.question; let i = $index) {
+        <li class="item glass" [class.is-open]="openIndex() === i" appReveal [revealDelay]="i * 60">
+          <h3>
+            <button
+              type="button"
+              class="item__q"
+              [id]="'faq-q-' + i"
+              [attr.aria-expanded]="openIndex() === i"
+              [attr.aria-controls]="'faq-a-' + i"
+              (click)="toggle(i)"
+            >
+              <span>{{ f.question }}</span>
+              <span class="item__icon" aria-hidden="true"><app-icon name="chevronDown" /></span>
+            </button>
+          </h3>
+          <div
+            class="item__a"
+            [id]="'faq-a-' + i"
+            role="region"
+            [attr.aria-labelledby]="'faq-q-' + i"
+            [attr.inert]="openIndex() === i ? null : ''"
+          >
+            <div class="item__a-inner">
+              <p>{{ f.answer }}</p>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

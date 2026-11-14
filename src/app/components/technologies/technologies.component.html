@@ -1,0 +1,41 @@
+<section id="technologies" class="section tech" aria-labelledby="tech-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Tech Stack"
+      title="Technologies We"
+      highlight="Work With"
+      subtitle="A proven, modern toolkit for building secure, fast and maintainable software."
+      headingId="tech-title"
+    />
+
+    <div class="tech__grid">
+      @for (cat of categories; track cat.title; let ci = $index) {
+        <div class="cat glass" appReveal [revealDelay]="ci * 100">
+          <h3 class="cat__title">
+            <span class="cat__icon"><app-icon [name]="cat.icon" /></span>
+            {{ cat.title }}
+          </h3>
+          <ul class="cat__items">
+            @for (t of cat.items; track t.name; let i = $index) {
+              <li class="tile" [style.--c]="t.color" [style.--i]="i">
+                <span class="tile__mark" aria-hidden="true">{{ t.mark }}</span>
+                <span class="tile__name">{{ t.name }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- infinite marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      @for (round of [0, 1]; track round) {
+        @for (t of marquee; track t.name) {
+          <span class="marquee__item" [style.--c]="t.color"><i></i>{{ t.name }}</span>
+        }
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<section id="about" class="section about" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <!-- abstract technology illustration -->
+    <div class="about__art" appReveal aria-hidden="true">
+      <div class="art">
+        <div class="art__core">
+          <app-icon name="sparkles" [stroke]="1.6" />
+        </div>
+        <svg class="art__lines" viewBox="0 0 400 400">
+          <defs>
+            <linearGradient id="aboutLine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#00D4FF" />
+              <stop offset="1" stop-color="#9333EA" />
+            </linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="150" class="orbit" />
+          <circle cx="200" cy="200" r="100" class="orbit orbit--inner" />
+          <path d="M200 200 L70 110 M200 200 L330 110 M200 200 L90 310 M200 200 L320 300" class="link" />
+        </svg>
+        <div class="node node--1"><app-icon name="layout" /><span>UI / UX</span></div>
+        <div class="node node--2"><app-icon name="server" /><span>Backend</span></div>
+        <div class="node node--3"><app-icon name="database" /><span>Data</span></div>
+        <div class="node node--4"><app-icon name="cloud" /><span>Cloud</span></div>
+      </div>
+    </div>
+
+    <div class="about__copy">
+      <span class="eyebrow" appReveal>About Us</span>
+      <h2 id="about-title" appReveal [revealDelay]="80">
+        {{ about.title }} <span class="gradient-text">{{ about.highlight }}</span>
+      </h2>
+      <p class="lead" appReveal [revealDelay]="140">{{ about.description }}</p>
+      <p class="body" appReveal [revealDelay]="200">{{ about.body }}</p>
+
+      <ul class="highlights">
+        @for (h of highlights; track h.title; let i = $index) {
+          <li class="hl glass glow-border" appReveal [revealDelay]="240 + i * 100">
+            <span class="hl__icon"><app-icon [name]="h.icon" /></span>
+            <div>
+              <h3>{{ h.title }}</h3>
+              <p>{{ h.description }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

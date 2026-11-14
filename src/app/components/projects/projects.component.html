@@ -1,0 +1,98 @@
+<section id="projects" class="section section--alt" aria-labelledby="projects-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Our Work"
+      title="Demo Projects &"
+      highlight="Solution Concepts"
+      subtitle="Business websites and web applications that show the kind of work we design and develop. These are demonstration projects, not client case studies."
+      headingId="projects-title"
+    />
+
+    <div class="filters" role="group" aria-label="Filter projects" appReveal>
+      @for (f of filters; track f.id) {
+        <button
+          type="button"
+          class="filter"
+          [class.is-active]="filter() === f.id"
+          [attr.aria-pressed]="filter() === f.id"
+          (click)="filter.set(f.id)"
+        >
+          {{ f.label }} <span class="filter__count">{{ f.count }}</span>
+        </button>
+      }
+    </div>
+    <p class="visually-hidden" aria-live="polite">Showing {{ projects().length }} projects</p>
+
+    <ul class="projects">
+      @for (p of projects(); track p.title; let i = $index) {
+        <li class="proj glass glow-border" appReveal [revealDelay]="(i % 3) * 110">
+          <div class="proj__media">
+            <app-project-visual [variant]="p.visual" [accent]="p.accent" />
+            <span class="demo-badge proj__badge">Demo Project</span>
+            <span class="proj__type">{{ p.type === 'website' ? 'Business Website' : 'Web Application' }}</span>
+          </div>
+          <div class="proj__body">
+            <span class="proj__cat">{{ p.category }}</span>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <ul class="proj__tech" aria-label="Technologies used">
+              @for (t of p.tech; track t) { <li class="tag">{{ t }}</li> }
+            </ul>
+            <button type="button" class="proj__btn" #trigger (click)="open(p, trigger)">
+              View Details <app-icon name="arrowRight" />
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <!-- any-industry business websites -->
+    <div class="industries glass" appReveal>
+      <div class="industries__copy">
+        <span class="industries__icon"><app-icon name="globe" /></span>
+        <div>
+          <h3>Websites for Every Type of Business</h3>
+          <p>Whatever your industry, we design and build a fast, mobile-friendly website that brings you enquiries.</p>
+        </div>
+      </div>
+      <ul class="industries__list" aria-label="Industries we build websites for">
+        @for (ind of industries; track ind) { <li>{{ ind }}</li> }
+        <li class="more">+ any other business</li>
+      </ul>
+      <a href="#contact" class="btn btn--primary btn--sm">Get a Website for Your Business <app-icon name="arrowRight" class="arrow" /></a>
+    </div>
+  </div>
+
+  <!-- project details modal (native dialog: focus-trapped, Esc to close) -->
+  <dialog #dialog class="modal" aria-labelledby="modal-title" (close)="onClosed()" (click)="onBackdrop($event)">
+    @if (selected(); as p) {
+      <div class="modal__panel">
+        <div class="modal__media">
+          <app-project-visual [variant]="p.visual" [accent]="p.accent" />
+        </div>
+        <div class="modal__body">
+          <span class="demo-badge">Demo Project · Concept build</span>
+          <h3 id="modal-title">{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+          <h4>Key features</h4>
+          <ul class="modal__features">
+            @for (f of p.features; track f) {
+              <li><app-icon name="check" /> {{ f }}</li>
+            }
+          </ul>
+          <h4>Technologies</h4>
+          <ul class="proj__tech">
+            @for (t of p.tech; track t) { <li class="tag">{{ t }}</li> }
+          </ul>
+          <div class="modal__actions">
+            <a href="#contact" class="btn btn--primary btn--sm" (click)="close()">Build something similar</a>
+            <button type="button" class="btn btn--ghost btn--sm" (click)="close()">Close</button>
+          </div>
+        </div>
+        <button type="button" class="modal__close" aria-label="Close project details" (click)="close()">
+          <app-icon name="close" />
+        </button>
+      </div>
+    }
+  </dialog>
+</section>

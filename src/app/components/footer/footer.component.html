@@ -1,0 +1,64 @@
+<footer class="footer">
+  <div class="footer__glow" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- CTA band -->
+    <div class="band glass">
+      <div>
+        <h2>Ready to start your next project?</h2>
+        <p>Share your idea. We'll get back with a clear plan and estimate.</p>
+      </div>
+      <a href="#contact" class="btn btn--primary">Let's Talk <app-icon name="arrowRight" class="arrow" /></a>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#home" [attr.aria-label]="contact.brand + ' — back to top'"><app-logo /></a>
+        <p>
+          A software development studio building modern websites, scalable web applications and custom software for startups and growing businesses.
+        </p>
+        <div class="socials">
+          <a [href]="contact.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"><app-icon name="linkedin" /></a>
+          <a [href]="contact.github" target="_blank" rel="noopener" aria-label="GitHub"><app-icon name="github" /></a>
+          <a [href]="'mailto:' + contact.email" aria-label="Email"><app-icon name="mail" /></a>
+          <a [href]="whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><app-icon name="message" /></a>
+        </div>
+      </div>
+
+      <nav aria-label="Quick links">
+        <h3>Quick Links</h3>
+        <ul>
+          @for (l of links; track l.target) { <li><a [href]="'#' + l.target">{{ l.label }}</a></li> }
+        </ul>
+      </nav>
+
+      <div>
+        <h3>Services</h3>
+        <ul>
+          @for (s of services; track s.title) { <li><a href="#services">{{ s.title }}</a></li> }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Technologies</h3>
+        <ul>
+          @for (t of tech; track t) { <li><a href="#technologies">{{ t }}</a></li> }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Get in Touch</h3>
+        <ul class="contact-list">
+          <li><a [href]="'mailto:' + contact.email"><app-icon name="mail" /> {{ contact.email }}</a></li>
+          <li><a [href]="whatsapp" target="_blank" rel="noopener"><app-icon name="message" /> WhatsApp: {{ contact.phoneDisplay }}</a></li>
+          <li><span><app-icon name="mapPin" /> {{ contact.location }}</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {{ year }} {{ contact.brand }} — {{ contact.tagline }}. All rights reserved.</p>
+      <p class="note">Projects and testimonials marked “Demo” or “Sample” are illustrative content.</p>
+    </div>
+  </div>
+</footer>

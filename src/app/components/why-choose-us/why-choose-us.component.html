@@ -1,0 +1,38 @@
+<section id="why-us" class="section section--alt why" aria-labelledby="why-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Why Choose Us"
+      title="Engineering You Can"
+      highlight="Rely On"
+      subtitle="We treat your product like our own — with craft, accountability and a long-term mindset."
+      headingId="why-title"
+    />
+
+    <div class="bento">
+      <!-- feature tile -->
+      <article class="tile tile--feature glass glow-border" appReveal>
+        <div class="feature__code" aria-hidden="true">
+          <span><span class="k">&#64;Component</span>({{ '{' }}</span>
+          <span class="indent">changeDetection: <span class="v">OnPush</span>,</span>
+          <span class="indent">standalone: <span class="v">true</span></span>
+          <span>{{ '}' }})</span>
+          <span><span class="k">export class&nbsp;</span><span class="f">YourProduct</span> {{ '{' }}</span>
+          <span class="indent c">// clean · tested · documented</span>
+          <span>{{ '}' }}</span>
+        </div>
+        <span class="tile__icon"><app-icon [name]="items[0].icon" /></span>
+        <h3>{{ items[0].title }}</h3>
+        <p>{{ items[0].description }}</p>
+      </article>
+
+      @for (item of items.slice(1); track item.title; let i = $index) {
+        <article class="tile glass glow-border" [class.tile--wide]="i === items.length - 2" appReveal [revealDelay]="(i + 1) * 90">
+          <span class="tile__icon"><app-icon [name]="item.icon" /></span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+          <span class="tile__glow" aria-hidden="true"></span>
+        </article>
+      }
+    </div>
+  </div>
+</section>

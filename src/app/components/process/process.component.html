@@ -1,0 +1,29 @@
+<section id="process" class="section" aria-labelledby="process-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="How We Work"
+      title="Our Development"
+      highlight="Process"
+      subtitle="A transparent, milestone-driven workflow that keeps you informed and in control at every stage."
+      headingId="process-title"
+    />
+
+    <div class="timeline" appReveal>
+      <span class="timeline__track" aria-hidden="true"><span class="timeline__fill"></span></span>
+      <ol class="steps">
+      @for (step of steps; track step.number; let i = $index) {
+        <li class="step" [style.--i]="i">
+          <div class="step__node">
+            <app-icon [name]="step.icon" />
+          </div>
+          <div class="step__content">
+            <span class="step__num">{{ step.number }}</span>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </div>
+        </li>
+      }
+      </ol>
+    </div>
+  </div>
+</section>
