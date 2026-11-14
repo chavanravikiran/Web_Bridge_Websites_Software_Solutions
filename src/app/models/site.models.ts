@@ -59,6 +59,15 @@ export interface Project {
   accent: [string, string];
 }
 
+export interface EngagementModel {
+  icon: IconName;
+  title: string;
+  description: string;
+  bestFor: string;
+  points: string[];
+  featured?: boolean;
+}
+
 export interface ProcessStep {
   number: string;
   title: string;

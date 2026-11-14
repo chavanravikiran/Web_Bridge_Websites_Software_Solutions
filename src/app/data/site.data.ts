@@ -4,6 +4,7 @@
  */
 import {
   ContactInfo,
+  EngagementModel,
   Faq,
   Highlight,
   NavLink,
@@ -32,6 +33,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Services', target: 'services' },
   { label: 'Technologies', target: 'technologies' },
   { label: 'Projects', target: 'projects' },
+  { label: 'Hire Us', target: 'freelance' },
   { label: 'Contact', target: 'contact' },
 ];
 
@@ -42,7 +44,7 @@ export const HERO = {
   subtitle:
     'We design and develop modern websites, scalable applications, and custom software that help businesses grow faster.',
   /** factual capability points — no invented statistics */
-  points: ['Angular & Spring Boot specialists', 'Responsive by default', 'Clear, fixed-scope proposals'],
+  points: ['Angular & Spring Boot specialists', 'Open for freelance projects', 'Clear, fixed-scope proposals'],
 };
 
 /** Lines rendered in the animated hero terminal. */
@@ -319,6 +321,58 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+/* ---------- Freelance projects ---------- */
+export const FREELANCE = {
+  availability: 'Now accepting new freelance projects',
+  title: 'Hire Us for',
+  highlight: 'Freelance Projects',
+  subtitle:
+    'Startups, agencies and businesses worldwide can hire us for one-time projects, ongoing work or quick fixes, with flexible engagement models that fit your budget.',
+  perks: [
+    { icon: 'globe', text: 'Clients in any country, remote-first' },
+    { icon: 'message', text: 'Direct communication via WhatsApp, email & calls' },
+    { icon: 'shield', text: 'NDA available & full source-code ownership' },
+    { icon: 'clock', text: 'Milestone-based payments & regular updates' },
+  ],
+} as const;
+
+export const ENGAGEMENT_MODELS: EngagementModel[] = [
+  {
+    icon: 'target',
+    title: 'Fixed-Price Project',
+    description: 'A clearly defined scope, timeline and price agreed upfront.',
+    bestFor: 'Websites, MVPs & well-defined features',
+    points: ['Detailed scope & quotation', 'Milestone-based payments', 'Post-launch support window'],
+    featured: true,
+  },
+  {
+    icon: 'clock',
+    title: 'Hourly / Part-Time',
+    description: 'Flexible hours for evolving requirements or ongoing improvements.',
+    bestFor: 'Changing scope & feature additions',
+    points: ['Pay only for hours worked', 'Weekly progress reports', 'Scale hours up or down'],
+  },
+  {
+    icon: 'users',
+    title: 'Dedicated Developer',
+    description: 'A developer working with your team on a monthly retainer.',
+    bestFor: 'Agencies & long-term products',
+    points: ['Works in your tools & workflow', 'Overlapping working hours', 'Monthly retainer pricing'],
+  },
+  {
+    icon: 'wrench',
+    title: 'Small Tasks & Fixes',
+    description: 'Quick bug fixes, updates and small enhancements to existing apps.',
+    bestFor: 'Existing websites & applications',
+    points: ['Fast turnaround', 'Code review before changes', 'Angular, Java & Spring Boot apps'],
+  },
+];
+
+export const ENGAGEMENT_OPTIONS: string[] = [
+  ...ENGAGEMENT_MODELS.map((m) => m.title),
+  'Not sure yet — need advice',
+];
+
 /** Industries we build business websites for (shown under the projects grid). */
 export const INDUSTRIES: string[] = [
   'Retail & Shops',
@@ -383,6 +437,11 @@ export const FAQS: Faq[] = [
     question: 'What software development services do you provide?',
     answer:
       'We build custom software, web applications, Angular frontends, Java & Spring Boot backends, REST APIs and microservices, e-commerce platforms, database design and optimization, plus website redesign and maintenance.',
+  },
+  {
+    question: 'Do you accept freelance projects?',
+    answer:
+      'Yes. We take on freelance projects from startups, agencies and businesses worldwide, from complete websites and web applications to small tasks and bug fixes. You can hire us on a fixed-price, hourly/part-time or dedicated-developer basis.',
   },
   {
     question: 'Do you develop custom web applications?',

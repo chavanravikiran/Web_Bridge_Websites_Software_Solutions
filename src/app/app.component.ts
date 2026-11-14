@@ -7,6 +7,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { TechnologiesComponent } from './components/technologies/technologies.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { FreelanceComponent } from './components/freelance/freelance.component';
 import { ProcessComponent } from './components/process/process.component';
 import { WhyChooseUsComponent } from './components/why-choose-us/why-choose-us.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
@@ -23,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ServicesComponent,
     TechnologiesComponent,
     ProjectsComponent,
+    FreelanceComponent,
     ProcessComponent,
     WhyChooseUsComponent,
     TestimonialsComponent,
@@ -39,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
       <app-services />
       <app-technologies />
       <app-projects />
+      <app-freelance />
       <app-process />
       <app-why-choose-us />
       <app-testimonials />

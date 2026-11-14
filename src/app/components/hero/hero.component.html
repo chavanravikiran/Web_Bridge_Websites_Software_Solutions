@@ -9,10 +9,16 @@
 
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="hero__trust anim" style="--d: 0ms">
-        <span class="pulse" aria-hidden="true"></span>
-        {{ hero.trust }}
-      </p>
+      <div class="hero__badges anim" style="--d: 0ms">
+        <a href="#freelance" class="hero__avail">
+          <span class="pulse pulse--green" aria-hidden="true"></span>
+          Available for freelance projects
+        </a>
+        <p class="hero__trust">
+          <span class="pulse" aria-hidden="true"></span>
+          {{ hero.trust }}
+        </p>
+      </div>
 
       <h1 id="hero-title" class="hero__title anim" style="--d: 120ms">
         {{ hero.titleLead }}
